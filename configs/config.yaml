@@ -1,0 +1,60 @@
+# model settings
+model_cfg:
+  name: UniFiNet_DETR
+  
+  # --- backbone
+  img_sz: [512,512]
+  hidden_dim: 256
+  specify_model: resnet34
+  backbone_pretrained: /data/guanxiongjun/UniFiNet/pretrain/hub/checkpoints/resnet34-b627a593.pth
+
+  # --- query
+  num_queries: 100
+  
+  # --- transformer
+  nhead: 8
+  num_encoder_layers: 6
+  num_decoder_layers: 6
+  dim_feedforward: 2048
+  dropout: 0.1
+
+  # --- class
+  num_classes: 4 # 3 types + 1 background
+
+train_cfg:
+  # initial config
+  lr: 1.0e-3
+  end_lr: 1.0e-6
+  epochs: 80
+  batch_size: 6
+  cuda_ids: [0,1]
+
+  # gradient clipping max norm
+  clip_max_norm: 0.1 
+
+  # lr iteration
+  scheduler_type: CosineAnnealingLR
+  optimizer: adamW
+
+  # save ckpts
+  ckpts_num: 2
+
+  # data augmentation
+  apply_aug: True
+  trans_aug: 80 # [-trans, trans]
+  rot_aug: 180 # [-rot, rot]
+
+# save settings
+save_cfg:
+  save_basedir: /data/guanxiongjun/UniFiNet/saved/DETR
+  save_title: test # time / test
+
+# matcher settings
+matcher_cfg:
+  set_cost_class: 1 # Class coefficient in the matching cost
+  set_cost_bbox: 5 # L1 box coefficient in the matching cost
+
+# loss settings
+loss_cfg:
+  bbox_loss_coef: 5
+  eos_coef: 0.1 # Relative classification weight of the no-object class

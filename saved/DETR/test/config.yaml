@@ -1,0 +1,46 @@
+!!python/object/apply:types.SimpleNamespace
+state:
+  loss_cfg: !!python/object/apply:types.SimpleNamespace
+    state:
+      bbox_loss_coef: 5
+      eos_coef: 0.1
+  matcher_cfg: !!python/object/apply:types.SimpleNamespace
+    state:
+      set_cost_bbox: 5
+      set_cost_class: 1
+  model_cfg: !!python/object/apply:types.SimpleNamespace
+    state:
+      backbone_pretrained: /data/guanxiongjun/UniFiNet/pretrain/hub/checkpoints/resnet34-b627a593.pth
+      dim_feedforward: 2048
+      dropout: 0.1
+      hidden_dim: 256
+      img_sz:
+      - 512
+      - 512
+      name: UniFiNet_DETR
+      nhead: 8
+      num_classes: 4
+      num_decoder_layers: 6
+      num_encoder_layers: 6
+      num_queries: 100
+      specify_model: resnet34
+  save_cfg: !!python/object/apply:types.SimpleNamespace
+    state:
+      save_basedir: /data/guanxiongjun/UniFiNet/saved/DETR
+      save_title: test
+  train_cfg: !!python/object/apply:types.SimpleNamespace
+    state:
+      apply_aug: true
+      batch_size: 24
+      ckpts_num: 2
+      clip_max_norm: 0.1
+      cuda_ids:
+      - 0
+      - 1
+      end_lr: 1.0e-06
+      epochs: 80
+      lr: 0.001
+      optimizer: adamW
+      rot_aug: 180
+      scheduler_type: CosineAnnealingLR
+      trans_aug: 80
