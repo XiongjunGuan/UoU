@@ -1,2 +1,2 @@
 # UoU
-A universal fingerprint feature extraction paradigm based on large-scale unsupervised learning
+A **U**niversal fingerprint feature extraction paradigm based **o**n large-scale **U**nsupervised learning
